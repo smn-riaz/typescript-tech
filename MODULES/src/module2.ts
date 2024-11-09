@@ -359,6 +359,102 @@ type HasPlance= CheckVehicle2<"plane">
 
 
 //******** * 2.10 *********//
+//MAPPED TYPES
+
+const arrofNUmbers: number[] = [1,2,3]
+
+// const arrOfStrings: string[] = ['1','2','3']
+
+
+const arrOfStrings:string[] = arrofNUmbers.map(number => number.toString())
+
+
+type AreaNumber = {
+    height: number;
+    width:number
+}
+
+type Height = AreaNumber['height'] // look up type
+
+
+
+type AreaString<T> = {
+    [key in keyof T] : T[key]
+}
+
+
+const area1: AreaString<{height:string; width:number}> = {
+ height: "100",
+ width:100
+}
+
+
+console.log(area1);
+
+
+
+
+
+
+
+
+
+
+
+
+//******** * 2.11 *********//
+// Utility types
+
+//PICK
+ type Person = {
+    name:string;
+    age:number;
+    email?:string;
+    contactNo:string
+ }
+
+
+ type Name = Pick<Person, "name">
+ type NameAge = Pick<Person, "name"|"age">
+
+
+
+ // OMIT  -- opposite of Pick
+ type ContactInfo = Omit<Person,"name"|"age">
+
+
+
+ // REQUIRED -- not optional ?
+ type PersonRequired = Required<Person>
+
+
+
+ // PARTIAL
+ type PersonPertial = Partial<Person>
+
+
+
+ //READONLY
+type ReadOnlyPerson = Readonly<Person>
+
+
+
+//RECORD
+type MyObj = Record<string,string>
+const obj1 : MyObj = {
+    a:"a",
+    b:'b',
+    c:'c'
+}
+
+
+const EmptyObj:Record<string,unknown> = {}
+
+
+
+
+
+
 
 
 }

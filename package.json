@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "ts-node-dev": "^2.0.0"
-  }
+  },
+  "scripts": {
+  "start": "tsnd --respawn module2.ts"
+}
+
+
 }
