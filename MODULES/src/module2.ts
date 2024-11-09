@@ -230,7 +230,7 @@ const addCourseToStudent = <T extends {name:string,id:number}>(student:T) => {
 
 const student5 = addCourseToStudent ({id:22, name:'er'})
 
-}
+
 
 
 
@@ -249,3 +249,116 @@ type Owner = "bike" | "car" | "ship" // manually
 
 
 type Owner2 = keyof Vehicle
+
+
+
+const getPropertyValue = <X,Y extends keyof X> (obj:X, key:Y) => {
+    return obj[key]
+}
+
+const car = {
+    model:'Toyota 100',
+    year: 200
+}
+
+const res5 = getPropertyValue(car,"year")
+
+
+
+
+
+
+//******** * 2.8 *********//
+// Asynchronous typescript
+const createPromise = (): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
+        const data:string = 'something'
+        if(data) {
+            resolve(data)
+        } else {
+            reject('Failed to load data')
+        }
+    })
+}
+
+const showData = async() :Promise<string> => {
+    const data = await createPromise()
+    return data
+}
+
+showData()
+
+
+type Todo = {
+    id:number;
+    userId:number;
+    title:string;
+    completed:boolean
+}
+
+const getTodo = async(): Promise<Todo> => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+
+    const data = await response.json()
+    return data
+}
+
+getTodo()
+
+
+
+
+
+//******** * 2.9 *********//
+// Conditional types , in this way the types value can be set
+type a1 = null
+type a2 = undefined
+type a3 = number
+
+type x = a1 extends null ? true :false
+
+
+type y = a3 extends null ? true : a2 extends undefined ? undefined: any
+
+
+
+
+
+
+
+type sheikh = {
+    bike:string;
+    car:string;
+    ship:string
+}
+
+type CheckVehicle<T> = T extends "bike" | "car" |"ship" ? true : false
+
+
+type HasBike = CheckVehicle<"car">
+
+
+
+type sheikh2 = {
+    bike:string;
+    car:string;
+    ship:string
+    plane:string
+}
+
+type CheckVehicle2<T> = T extends keyof sheikh2 ? true : false
+
+
+type HasPlance= CheckVehicle2<"plane">
+
+
+
+
+
+
+
+
+//******** * 2.10 *********//
+
+
+}
